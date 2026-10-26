@@ -6,14 +6,18 @@ import { getSpecs } from "@/lib/catalog-data";
 import { waLink } from "@/lib/site";
 import ProductImage from "./ProductImage";
 import { BoxSvg, SpecSvg, WhatsAppSvg } from "./icons";
+import AddToCart from "@/components/shop/AddToCart";
+import { usePresence } from "@/components/shop/ShopModal";
 
 interface Props {
   product: CatalogProduct | null;
   onClose: () => void;
 }
 
-export default function ProductModal({ product, onClose }: Props) {
-  const open = !!product;
+export default function ProductModal({ product: current, onClose }: Props) {
+  const open = !!current;
+  // Conserva el producto mientras corre la animación de salida
+  const { shown: product, leaving } = usePresence(current);
 
   useEffect(() => {
     if (!open) return;
@@ -28,7 +32,7 @@ export default function ProductModal({ product, onClose }: Props) {
 
   return (
     <div
-      className={`dt-modal-overlay${open ? " is-active" : ""}`}
+      className={`dt-modal-overlay${open ? " is-active" : ""}${leaving ? " is-leaving" : ""}`}
       onClick={(e) => e.target === e.currentTarget && onClose()}
       aria-hidden={!open}
     >
@@ -68,19 +72,16 @@ export default function ProductModal({ product, onClose }: Props) {
                 </span>
               ))}
             </div>
-            <p className="dt-modal__desc">
-              Te ayudamos a confirmar disponibilidad, calcular las cajas que necesitas según tus
-              metros y combinar este acabado con el resto de tu espacio.
-            </p>
+            <AddToCart key={product.id} product={product} />
             <a
-              className="dt-btn dt-btn--wa"
+              className="dt-modal__wa"
               target="_blank"
               rel="noopener noreferrer"
               href={waLink(
                 `¡Hola DECORTILES! Me interesa cotizar: ${product.name} (${product.collection}).`,
               )}
             >
-              <WhatsAppSvg /> Cotizar con un asesor
+              <WhatsAppSvg size={15} /> ¿Dudas? Cotiza con un asesor
             </a>
           </div>
         </div>

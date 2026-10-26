@@ -185,3 +185,24 @@ export const imgSrc = (path: string) => encodeURI(path);
 
 /** Productos que se muestran como "destacados" en el home */
 export const FEATURED_IDS = ["p001", "p003", "p009", "p029", "p036", "p050", "p062", "p078"];
+
+/** Producto de la colección especial (bloque destacado del catálogo, no está en la grilla) */
+export const SPECIAL_PRODUCT: CatalogProduct = {
+  id: "featured-sm001h",
+  category: "porcelanatos",
+  name: "Porcelanato Mosaico Terra SM001H",
+  collection: "Colección Especial 2026",
+  size: "60×120 cm",
+  box: ["1.44 m² x caja", "27 kg x caja", "2 piezas x caja"],
+  image: "/images/Primera entrega/29.png",
+};
+
+export const findProduct = (id: string): CatalogProduct | undefined =>
+  id === SPECIAL_PRODUCT.id ? SPECIAL_PRODUCT : PRODUCTS.find((p) => p.id === id);
+
+/** Miniatura WebP generada con `npm run thumbs` (carrito, checkout, dashboard) */
+export const thumbSrc = (path: string) =>
+  path.replace(/^\/images\/([^/]+)\/([^/]+)\.\w+$/, "/images/thumbs/$1/$2.webp");
+
+/** Sanitarios y lavamanos son fotos de producto sobre blanco: se muestran completas, sin recortar */
+export const isObjectPhoto = (p?: CatalogProduct) => p?.category === "sanitarios" || p?.category === "lavamanos";

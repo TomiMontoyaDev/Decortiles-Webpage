@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif, League_Spartan, Raleway } from "next/font/google";
 import "./globals.css";
 import "./decortiles.css";
+import "./shop.css";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import ShopUI from "@/components/shop/ShopUI";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -89,8 +91,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${leagueSpartan.variable} ${raleway.variable} antialiased`}
       >
-        {children}
-        <WhatsAppFloat />
+        <ShopUI>
+          {children}
+          <WhatsAppFloat />
+        </ShopUI>
       </body>
     </html>
   );

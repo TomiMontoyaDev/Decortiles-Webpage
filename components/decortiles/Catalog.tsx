@@ -5,6 +5,7 @@ import { Search, X } from "lucide-react";
 import {
   CATEGORIES,
   PRODUCTS,
+  SPECIAL_PRODUCT,
   getSpecs,
   type CatalogProduct,
   type CategoryId,
@@ -20,16 +21,7 @@ export type CatalogFilter = "todos" | CategoryId;
 
 const MAIN_CATS: CategoryId[] = ["porcelanatos", "paredes", "pisos"];
 
-/** Producto de la colección especial (bloque destacado, no está en la grilla) */
-const FEATURED: CatalogProduct = {
-  id: "featured-sm001h",
-  category: "porcelanatos",
-  name: "Porcelanato Mosaico Terra SM001H",
-  collection: "Colección Especial 2026",
-  size: "60×120 cm",
-  box: ["1.44 m² x caja", "27 kg x caja", "2 piezas x caja"],
-  image: "/images/Primera entrega/29.png",
-};
+const FEATURED = SPECIAL_PRODUCT;
 
 const norm = (s: string) =>
   s

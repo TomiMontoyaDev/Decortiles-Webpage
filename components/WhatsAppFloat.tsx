@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 interface WhatsAppFloatProps {
@@ -13,6 +14,9 @@ export default function WhatsAppFloat({
   message = "¡Hola! Me interesa conocer más sobre sus productos de cerámica y porcelanatos.",
 }: WhatsAppFloatProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const pathname = usePathname() || "/";
+  // No se muestra en el panel interno ni en la factura imprimible
+  if (pathname.startsWith("/admin") || pathname.startsWith("/factura")) return null;
 
   const openWhatsApp = () => {
     const encodedMessage = encodeURIComponent(message);

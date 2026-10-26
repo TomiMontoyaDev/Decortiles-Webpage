@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { CATEGORIES } from "@/lib/catalog-data";
 import { WA_COTIZAR } from "@/lib/site";
+import CartButton from "@/components/shop/CartButton";
 
 interface HeaderProps {
   /** Header transparente sobre el hero (solo home). Se vuelve sólido al hacer scroll. */
@@ -107,6 +108,7 @@ export default function Header({ overlay = false }: HeaderProps) {
             <a href={WA_COTIZAR} target="_blank" rel="noopener noreferrer" className="dt-btn dt-btn--primary dt-btn--sm dt-header__cta">
               Cotizar
             </a>
+            <CartButton />
             <button
               className="dt-burger"
               onClick={() => setOpen((o) => !o)}
@@ -139,6 +141,7 @@ export default function Header({ overlay = false }: HeaderProps) {
           <Link href="/quienes-somos/">Quiénes somos</Link>
           <Link href="/blog/">Blog</Link>
           <Link href="/contacto/">Contacto</Link>
+          <Link href="/carrito/">Mi carrito</Link>
         </nav>
         <a href={WA_COTIZAR} target="_blank" rel="noopener noreferrer" className="dt-btn dt-btn--primary dt-drawer__cta">
           Solicitar cotización
